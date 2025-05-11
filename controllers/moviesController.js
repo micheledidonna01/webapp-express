@@ -6,7 +6,7 @@ const errorsHandler = require('../middlewares/errorsHandler.js');
 function index(req, res){
 
     //query
-    const sql = `SELECT movies.*, AVG(reviews.vote) AS "voto_medio" FROM movies_db.movies
+    const sql = `SELECT movies.*, ROUND(AVG(reviews.vote), 2) AS "voto_medio" FROM movies_db.movies
             JOIN movies_db.reviews ON reviews.movie_id = movies.id
             GROUP BY movies.id;`;
 
