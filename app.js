@@ -8,8 +8,12 @@ const notFound = require('./middlewares/notFound.js');
 //body parser
 app.use(express.json());
 
+
 //connection to routers
 const movieRouter = require('./routers/movies.js');
+
+//static middleware
+app.use(express.static('public'));
 
 //route to homepage
 app.get('/', (req, res)=>{
