@@ -10,13 +10,20 @@ app.use(express.json());
 
 //connection to routers
 const movieRouter = require('./routers/movies.js');
-app.use('/movies', movieRouter);
+
+//route to homepage
+app.get('/', (req, res)=>{
+    res.send('Benvenuto nella homepage');
+});
+
+//route of moviese
+app.use('/api/movies', movieRouter);
 
 
 //middlewares for handle errors
 
 //error 500
-app.use("/movies", errorsHandler);
+app.use("/api/movies", errorsHandler);
 
 //error 404
 app.use(notFound);

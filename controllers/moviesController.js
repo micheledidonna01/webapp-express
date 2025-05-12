@@ -1,5 +1,4 @@
 const connection = require('../data/db.js');
-const errorsHandler = require('../middlewares/errorsHandler.js');
 
 
 //index
@@ -15,7 +14,7 @@ function index(req, res){
         if (err) return res.status(500).json({errorMessage: err.message});
         res.json(results.map(result =>({
             ...result,
-            imagePath : process.env.IMG_PATH + "movies/" +  result.title.toLowerCase().replace(" ", "_") + ".jpg"
+            imagePath : process.env.IMG_PATH + "api/movies/" +  result.image + ".jpg"
         })));
     });
 }
@@ -36,19 +35,19 @@ function show(req, res){
 
     // execute query 1
     connection.query(sql, [id], (err, result) => {
-        if (err) return res.status(500).json({ errorMessage: err.message });
-        if (result.length === 0) return res.status(404).json({errorMessage: err.message});
+        if (err) return res.status(500).json({ errorMessage: 'Error Server' });
+        if (result.length === 0) return res.status(404).json({errorMessage: 'Not Found'});
         const movie = result[0];
 
         // execute query 2
         connection.query(sqlReviews, [id], (err, resultReviews) => {
-            if (err) return res.status(500).json({ errorMessage: err.message });
+            if (err) return res.status(500).json({errorMessage: 'Error Server' });
 
             movie.reviews = resultReviews.map(review => {
                 return {'name': review.name, 'review': review.text};
             });
 
-            movie.imagePath = process.env.IMG_PATH + "movies/" + movie.title.toLowerCase().replace(" ", "_") + ".jpg";
+            movie.imagePath = process.env.IMG_PATH + "api/movies/" + movie.image + ".jpg";
             res.json(movie);
         });
         
