@@ -14,7 +14,7 @@ function index(req, res){
         if (err) return res.status(500).json({errorMessage: err.message});
         res.json(results.map(result =>({
             ...result,
-            imagePath : process.env.IMG_PATH + "api/movies/" +  result.image
+            imagePath : process.env.IMG_PATH + "movies_cover/" +  result.image
         })));
     });
 }
@@ -47,7 +47,7 @@ function show(req, res){
                 return {'name': review.name, 'review': review.text};
             });
 
-            movie.imagePath = process.env.IMG_PATH + "api/movies/" + movie.image;
+            movie.imagePath = process.env.IMG_PATH + "movies_cover/" + movie.image;
             res.json(movie);
         });
         
