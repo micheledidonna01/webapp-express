@@ -19,7 +19,7 @@ app.use(cors({
 app.use(express.static('public'));
 
 //body parser
-app.use(express.json());
+app.use(express.json());//req.body
 
 
 //route to homepage
