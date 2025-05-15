@@ -31,6 +31,7 @@ app.get('/', (req, res)=>{
 app.use('/api/movies', movieRouter);
 
 
+
 //middlewares for handle errors
 
 //error 500

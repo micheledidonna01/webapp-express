@@ -8,7 +8,7 @@ const storage = multer.diskStorage({
     filename: function (req, file, cb) {
 
 
-        slugifyName = slugify(file.originalname, {
+        const slugifyName = slugify(file.originalname, {
             replacement: '-',  // replace spaces with replacement character, defaults to `-`
             remove: undefined, // remove characters that match regex, defaults to `undefined`
             lower: true,      // convert to lower case, defaults to `false`
@@ -16,8 +16,8 @@ const storage = multer.diskStorage({
             locale: 'vi',      // language code of the locale to use
             trim: true         // trim leading and trailing replacement chars, defaults to `true`
         });
-        const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1E9)}-${file.originalname}`
-        cb(null, uniqueSuffix)
+        const uniqueName = `${Date.now()}-${Math.round(Math.random() * 1E9)}-${slugifyName}`
+        cb(null, uniqueName)
     }
 })
 

@@ -1,19 +1,19 @@
 const express = require('express');
 const router = express.Router();
 const movieController = require('../controllers/moviesController.js');
-const multer = require('multer');
 const upload = require('../middlewares/multer.js');
 
 //index
 router.get('/', movieController.index);
 
 //show
-router.get('/:id', movieController.show);
-
-//store review
-router.post('/:id/reviews', movieController.storeReview);
+router.get('/:slug', movieController.show);
 
 //store movie
-router.post('/', upload.single("image"), movieController.storeMovie);
+router.post('/add-movie', upload.single("image"), movieController.storeMovie);
+
+//store review
+router.post('/:slug/reviews', movieController.storeReview);
+
 
 module.exports = router;
